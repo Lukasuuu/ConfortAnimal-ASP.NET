@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center py-5">
+    <h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); font-size: 3.5rem;">
+        🐄 Bem-Vindo ao ConfortAnimal
+    </h1>
+    <p class="glass-text-muted" style="font-size: 1.3rem;">
+        O bem-estar dos seus animais começa aqui.
+    </p>
+
+    @if (User.IsInRole("Admin") || User.IsInRole("Proprietario"))
+    {
+        <p class="glass-text" style="font-size: 1.2rem;">
+            Olá <strong style="background-color: rgba(0,0,0,0.6); color: white; padding: 2px 10px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3); font-size: 1.3rem; text-shadow: 0 0 10px rgba(255,255,255,0.4);">@User.Identity.Name</strong>, Pronto para monitorizar a sua propriedade?
+        </p>
+
+        <div class="mt-4 d-flex justify-content-center gap-3">
+            <a asp-controller="Animais" asp-action="Index" class="btn btn-lg glass-btn" style="font-size: 1.1rem; padding: 0.75rem 1.5rem;">
+                🐄 Ver Animais
+            </a>
+            <a asp-controller="Ambientes" asp-action="Index" class="btn btn-lg glass-btn" style="font-size: 1.1rem; padding: 0.75rem 1.5rem;">
+                🌡️ Ver Ambientes
+            </a>
+            <a asp-controller="Avaliacoes" asp-action="Index" class="btn btn-lg glass-btn" style="font-size: 1.1rem; padding: 0.75rem 1.5rem;">
+                📋 Ver Avaliações
+            </a>
+        </div>
+    }
+    else
+    {
+        <p class="glass-text-muted" style="font-size: 1.2rem;">
+            Monitorize o bem-estar dos seus bovinos em tempo real, controle as condições ambientais e tome decisões com base em dados precisos.
+        </p>
+        <div class="mt-4 d-flex justify-content-center gap-3">
+            <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-lg glass-btn" style="font-size: 1.1rem; padding: 0.75rem 1.5rem;">
+                🔑 Entrar
+            </a>
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-lg glass-btn" style="font-size: 1.1rem; padding: 0.75rem 1.5rem;">
+                📝 Registar
+            </a>
+        </div>
+    }
+</div>

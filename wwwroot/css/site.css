@@ -1,0 +1,250 @@
+/* =====================
+   BASE
+===================== */
+html {
+    font-size: 14px;
+    height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    background-image: url('/imagens/fundo.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: #2d2d2d;
+}
+
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(45, 45, 45, 0.6);
+        z-index: -1;
+    }
+
+.container {
+    flex: 1;
+}
+
+/* =====================
+   NAVBAR
+===================== */
+.navbar {
+    background-color: rgba(30, 30, 30, 0.85) !important;
+    background-image: radial-gradient(ellipse 30px 20px at 2% 30%, rgba(255,255,255,0.08) 100%, transparent 100%), radial-gradient(ellipse 15px 25px at 7% 65%, rgba(255,255,255,0.06) 100%, transparent 100%), radial-gradient(ellipse 25px 15px at 12% 20%, rgba(255,255,255,0.07) 100%, transparent 100%), radial-gradient(ellipse 20px 18px at 17% 75%, rgba(255,255,255,0.08) 100%, transparent 100%), radial-gradient(ellipse 18px 22px at 22% 40%, rgba(255,255,255,0.06) 100%, transparent 100%), radial-gradient(ellipse 28px 16px at 27% 55%, rgba(255,255,255,0.07) 100%, transparent 100%), radial-gradient(ellipse 16px 20px at 32% 25%, rgba(255,255,255,0.08) 100%, transparent 100%), radial-gradient(ellipse 22px 18px at 37% 70%, rgba(255,255,255,0.06) 100%, transparent 100%), radial-gradient(ellipse 20px 25px at 42% 35%, rgba(255,255,255,0.07) 100%, transparent 100%), radial-gradient(ellipse 26px 16px at 47% 60%, rgba(255,255,255,0.08) 100%, transparent 100%), radial-gradient(ellipse 18px 22px at 52% 20%, rgba(255,255,255,0.06) 100%, transparent 100%), radial-gradient(ellipse 24px 18px at 57% 75%, rgba(255,255,255,0.07) 100%, transparent 100%), radial-gradient(ellipse 20px 15px at 62% 40%, rgba(255,255,255,0.08) 100%, transparent 100%), radial-gradient(ellipse 16px 24px at 67% 55%, rgba(255,255,255,0.06) 100%, transparent 100%), radial-gradient(ellipse 28px 18px at 72% 25%, rgba(255,255,255,0.07) 100%, transparent 100%), radial-gradient(ellipse 18px 20px at 77% 65%, rgba(255,255,255,0.08) 100%, transparent 100%), radial-gradient(ellipse 22px 16px at 82% 35%, rgba(255,255,255,0.06) 100%, transparent 100%), radial-gradient(ellipse 20px 24px at 87% 70%, rgba(255,255,255,0.07) 100%, transparent 100%), radial-gradient(ellipse 26px 18px at 92% 30%, rgba(255,255,255,0.08) 100%, transparent 100%), radial-gradient(ellipse 16px 22px at 97% 60%, rgba(255,255,255,0.06) 100%, transparent 100%);
+}
+    .navbar .nav-link:hover,
+    .navbar .navbar-brand:hover {
+        background-color: rgba(255,255,255,0.15) !important;
+        border-radius: 8px;
+        transition: background-color 0.2s ease;
+    }
+    .navbar .navbar-brand {
+        font-size: 1.4rem !important;
+        padding: 0.5rem 1rem !important;
+    }
+
+    .navbar .nav-link,
+    .navbar .navbar-brand {
+        color: #ffffff !important;
+    }
+
+/* =====================
+   FOOTER
+===================== */
+footer {
+    width: 100%;
+    margin-top: auto;
+    background-color: rgba(30, 30, 30, 0.85) !important;
+    color: #ffffff !important;
+}
+
+    footer span,
+    footer .text-muted {
+        color: #cccccc !important;
+    }
+
+/* =====================
+   TABELAS
+===================== */
+.table {
+    background-color: rgba(0,0,0,0.45) !important;
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    overflow: hidden;
+    color: white !important;
+}
+
+    .table thead th {
+        background-color: rgba(0,0,0,0.3) !important;
+        color: white !important;
+        border-color: rgba(255,255,255,0.15) !important;
+    }
+
+    .table tbody tr {
+        border-color: rgba(255,255,255,0.1) !important;
+    }
+
+        .table tbody tr:hover {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: white !important;
+        }
+
+    .table td {
+        color: white !important;
+        border-color: rgba(255,255,255,0.1) !important;
+    }
+
+.table-striped > tbody > tr:nth-of-type(even) > * {
+    background-color: rgba(0,0,0,0.45) !important;
+    color: white !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: rgba(0,0,0,0.35) !important;
+    color: white !important;
+}
+
+/* =====================
+   BOTÕES
+===================== */
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus,
+.form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+.btn-primary,
+.btn-info,
+.btn-danger,
+.btn-success {
+    background-color: rgba(0,0,0,0.45) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: white !important;
+}
+
+    .btn-primary:hover,
+    .btn-info:hover,
+    .btn-danger:hover,
+    .btn-success:hover {
+        background-color: rgba(255,255,255,0.15) !important;
+        color: white !important;
+    }
+
+/* =====================
+   GLASSMORPHISM
+===================== */
+.glass-box {
+    background-color: rgba(0,0,0,0.45);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+.glass-input {
+    background-color: transparent !important;
+    color: white !important;
+    border-color: rgba(255,255,255,0.3) !important;
+}
+
+    .glass-input:focus {
+        background-color: transparent !important;
+        color: white !important;
+        border-color: rgba(255,255,255,0.6) !important;
+        box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.1) !important;
+    }
+
+    .glass-input::placeholder {
+        color: rgba(255,255,255,0.5) !important;
+    }
+
+    .glass-input::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+    }
+
+    .glass-input:-webkit-autofill,
+    .glass-input:-webkit-autofill:hover,
+    .glass-input:-webkit-autofill:focus {
+        -webkit-text-fill-color: white !important;
+        -webkit-box-shadow: 0 0 0px 1000px rgba(0,0,0,0.45) inset !important;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+.glass-btn {
+    background-color: rgba(0,0,0,0.45) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    color: white !important;
+    border-radius: 8px;
+}
+
+    .glass-btn:hover {
+        background-color: rgba(255,255,255,0.15) !important;
+        color: white !important;
+    }
+
+.glass-text {
+    color: white;
+}
+
+.glass-text-muted {
+    color: rgba(255,255,255,0.7);
+}
+
+.glass-hr {
+    border-color: rgba(255,255,255,0.2);
+}
+
+/* =====================
+   FORM FLOATING LABELS
+===================== */
+.form-floating > label {
+    color: rgba(255,255,255,0.7) !important;
+    padding: 1rem 0.75rem;
+}
+
+.form-floating > .glass-input:focus ~ label,
+.form-floating > .glass-input:not(:placeholder-shown) ~ label {
+    color: rgba(255,255,255,0.7) !important;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+
+    .form-floating > .glass-input:focus ~ label::after,
+    .form-floating > .glass-input:not(:placeholder-shown) ~ label::after {
+        background-color: transparent !important;
+        content: none !important;
+    }
+.form-floating > .glass-input::placeholder {
+    color: transparent !important;
+}
+/* =====================
+   SELECT / DROPDOWN
+===================== */
+.glass-input option {
+    background-color: rgba(30,30,30,0.95) !important;
+    color: white !important;
+}
+
+    .glass-input option:hover,
+    .glass-input option:checked {
+        background-color: rgba(255,255,255,0.15) !important;
+    }
+    .glass-input option:first-child {
+        background-color: rgba(30,30,30,0.95) !important;
+        color: rgba(255,255,255,0.5) !important;
+    }

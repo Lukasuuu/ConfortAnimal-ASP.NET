@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ConfortAnimal</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ConfortAnimal.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" style="color: white !important;" asp-area="" asp-controller="Home" asp-action="Index">🐄 ConfortAnimal</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("Proprietario"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: white !important;" asp-controller="Animais" asp-action="Index">🐄 Animais</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: white !important;" asp-controller="Ambientes" asp-action="Index">🌡️ Ambientes</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" style="color: white !important;" asp-controller="Avaliacoes" asp-action="Index">📋 Avaliações</a>
+                            </li>
+                        }
+
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top py-3" style="background-color: rgba(30,30,30,0.85);">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span style="color: white;">🐄 <strong>ConfortAnimal</strong> &copy; 2026</span>
+            <span style="color: #cccccc; font-size: 0.85rem;">Sistema de Monitorização do Bem-Estar Animal</span>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

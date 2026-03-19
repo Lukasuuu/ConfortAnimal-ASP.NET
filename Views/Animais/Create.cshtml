@@ -1,0 +1,60 @@
+﻿@model ConfortAnimal.Models.Bovino
+
+@{
+    ViewData["Title"] = "Criar Animal";
+}
+
+<h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">🐄 Criar Animal</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="glass-box">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                {{!-- Campos base do Animal --}}
+                <div class="form-floating mb-3">
+                    <input asp-for="Nome" class="form-control glass-input" placeholder="Nome" />
+                    <label asp-for="Nome" class="glass-label">🐄 Nome</label>
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Peso" class="form-control glass-input" placeholder="Peso" />
+                    <label asp-for="Peso" class="glass-label">⚖️ Peso</label>
+                    <span asp-validation-for="Peso" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="Idade" class="form-control glass-input" placeholder="Idade" />
+                    <label asp-for="Idade" class="glass-label">📅 Idade</label>
+                    <span asp-validation-for="Idade" class="text-danger"></span>
+                </div>
+
+ 
+                <div class="form-floating mb-3">
+                    <input asp-for="Raca" class="form-control glass-input" placeholder="Raça" />
+                    <label asp-for="Raca" class="glass-label">🧬 Raça</label>
+                    <span asp-validation-for="Raca" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="ProdutividadeLeite" class="form-control glass-input" placeholder="Produtividade de Leite (L/dia)" />
+                    <label asp-for="ProdutividadeLeite" class="glass-label">🥛 Produtividade de Leite (L/dia)</label>
+                    <span asp-validation-for="ProdutividadeLeite" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <input type="submit" value="✅ Criar Animal" class="btn btn-lg glass-btn" />
+                    <a asp-action="Index" class="btn btn-lg glass-btn">↩️ Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ConfortAnimal.Models.Ambiente>
+
+@{
+    ViewData["Title"] = "Ambientes";
+}
+
+<h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">🌿 Monitorização dos Ambientes</h1>
+<p class="glass-text-muted">Acompanhe as condições ambientais dos locais onde os seus animais vivem e produzem.</p>
+
+<p>
+    <a asp-action="Create" class="btn glass-btn">➕ Criar Novo</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.temperatura)</th>
+            <th>@Html.DisplayNameFor(model => model.umidade)</th>
+            <th>@Html.DisplayNameFor(model => model.local)</th>
+            <th>@Html.DisplayNameFor(model => model.dataRegisto)</th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th>@Html.DisplayNameFor(model => model.Proprietario)</th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.temperatura)</td>
+                <td>@Html.DisplayFor(modelItem => item.umidade)</td>
+                <td>@Html.DisplayFor(modelItem => item.local)</td>
+                <td>@Html.DisplayFor(modelItem => item.dataRegisto)</td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>@Html.DisplayFor(modelItem => item.Proprietario.UserName)</td>
+                }
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-sm glass-btn">✏️ Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.id" class="btn btn-sm glass-btn">🔍 Detalhes</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-sm glass-btn" style="background-color: rgba(220,53,69,0.6) !important;">🗑️ Apagar</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

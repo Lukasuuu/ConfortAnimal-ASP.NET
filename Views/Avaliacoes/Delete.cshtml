@@ -1,0 +1,41 @@
+﻿@model ConfortAnimal.Models.Avaliacao
+
+@{
+    ViewData["Title"] = "Apagar Avaliação";
+}
+
+<h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">🗑️ Apagar Avaliação</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="glass-box">
+            <h4 class="glass-text">Tem a certeza que quer apagar?</h4>
+            <hr class="glass-hr" />
+
+            <dl class="row">
+                <dt class="col-sm-4 glass-text-muted">🐄 Animal</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.bovinoId)</dd>
+
+                <dt class="col-sm-4 glass-text-muted">🌡️ Ambiente</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.ambienteId)</dd>
+
+                <dt class="col-sm-4 glass-text-muted">📊 ITU</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.valorITU)</dd>
+
+                <dt class="col-sm-4 glass-text-muted">📋 Resultado</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.resultado)</dd>
+
+                <dt class="col-sm-4 glass-text-muted">📅 Data</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.dataAvaliacao)</dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="id" />
+                <div class="d-grid gap-2">
+                    <input type="submit" value="🗑️ Confirmar Apagar" class="btn btn-lg glass-btn" style="background-color: rgba(220,53,69,0.6) !important;" />
+                    <a asp-action="Index" class="btn btn-lg glass-btn">↩️ Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

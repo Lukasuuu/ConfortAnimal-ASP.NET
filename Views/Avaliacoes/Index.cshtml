@@ -1,0 +1,74 @@
+﻿@model IEnumerable<ConfortAnimal.Models.Avaliacao>
+
+@{
+    ViewData["Title"] = "Avaliações";
+}
+
+<h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">📋 Histórico de Avaliações</h1>
+<p class="glass-text-muted">Consulte todas as avaliações de bem-estar animal realizadas na sua propriedade, com os resultados do índice ITU.</p>
+
+<p>
+    <a asp-action="Create" class="btn glass-btn">➕ Nova Avaliação</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Bovino</th>
+            <th>Ambiente</th>
+            <th>@Html.DisplayNameFor(model => model.valorITU)</th>
+            <th>@Html.DisplayNameFor(model => model.resultado)</th>
+            <th>@Html.DisplayNameFor(model => model.dataAvaliacao)</th>
+            @if (User.IsInRole("Admin"))
+            {
+                <th>Proprietário</th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@(item.Bovino?.Nome ?? "N/A")</td>
+                <td>@(item.Ambiente?.local ?? "N/A")</td>
+                <td>@item.valorITU</td>
+                <td>
+                    @if (item.resultado == "Conforto")
+                    {
+                        <span class="badge bg-success">🟢 Conforto</span>
+                    }
+                    else if (item.resultado == "Alerta")
+                    {
+                        <span class="badge bg-warning text-dark">🟡 Alerta</span>
+                    }
+                    else if (item.resultado == "Perigo")
+                    {
+                        <span class="badge text-dark" style="background-color: #fd7e14;">🟠 Perigo</span>
+                    }
+                    else if (item.resultado == "Emergência")
+                    {
+                        <span class="badge bg-danger">🔴 Emergência</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">@item.resultado</span>
+                    }
+                </td>
+                <td>@item.dataAvaliacao.ToString("dd/MM/yyyy HH:mm")</td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>@(item.Proprietario?.UserName ?? "N/A")</td>
+                }
+                <td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.id" class="btn btn-sm glass-btn">✏️ Editar</a>
+                        <a asp-action="Details" asp-route-id="@item.id" class="btn btn-sm glass-btn">🔍 Detalhes</a>
+                    }
+                    <a asp-action="Delete" asp-route-id="@item.id" class="btn btn-sm glass-btn" style="background-color: rgba(220,53,69,0.6) !important;">🗑️ Apagar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

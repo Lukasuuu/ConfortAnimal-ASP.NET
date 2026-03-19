@@ -1,0 +1,53 @@
+﻿@model ConfortAnimal.Models.Ambiente
+
+@{
+    ViewData["Title"] = "Editar Ambiente";
+}
+
+<h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">✏️ Editar Ambiente</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="glass-box">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="id" />
+
+                <div class="form-floating mb-3">
+                    <input asp-for="temperatura" class="form-control glass-input" placeholder="temperatura" />
+                    <label asp-for="temperatura" class="glass-label">🌡️ Temperatura</label>
+                    <span asp-validation-for="temperatura" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="umidade" class="form-control glass-input" placeholder="umidade" />
+                    <label asp-for="umidade" class="glass-label">💧 Umidade</label>
+                    <span asp-validation-for="umidade" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="local" class="form-control glass-input" placeholder="local" />
+                    <label asp-for="local" class="glass-label">📍 Local</label>
+                    <span asp-validation-for="local" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="dataRegisto" class="form-control glass-input" placeholder="dataRegisto" />
+                    <label asp-for="dataRegisto" class="glass-label">📅 Data de Registo</label>
+                    <span asp-validation-for="dataRegisto" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <input type="submit" value="💾 Salvar" class="btn btn-lg glass-btn" />
+                    <a asp-action="Index" class="btn btn-lg glass-btn">↩️ Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

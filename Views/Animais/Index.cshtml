@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ConfortAnimal.Models.Bovino>
+
+@{
+    ViewData["Title"] = "Animais";
+}
+
+<h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">🐮 Gestão dos Animais</h1>
+<p class="glass-text-muted">Registe e acompanhe os animais da sua propriedade, incluindo peso, idade e histórico de avaliações.</p>
+
+<p>
+    <a asp-action="Create" class="btn glass-btn">➕ Criar Novo</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.Peso)</th>
+            <th>@Html.DisplayNameFor(model => model.Idade)</th>
+
+            
+            <th>@Html.DisplayNameFor(model => model.Raca)</th>
+            <th>@Html.DisplayNameFor(model => model.ProdutividadeLeite)</th>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <th>Proprietário</th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                {{!-- Campos base do Animal --}}
+                <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => item.Peso)</td>
+                <td>@Html.DisplayFor(modelItem => item.Idade)</td>
+
+                {{!-- Campos específicos do Bovino --}}
+                <td>@(item.Raca ?? "N/A")</td>
+                <td>@item.ProdutividadeLeite L/dia</td>
+
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>@(item.Proprietario?.UserName ?? "N/A")</td> 
+                }
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm glass-btn">✏️ Editar</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm glass-btn">🔍 Detalhes</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm glass-btn" style="background-color: rgba(220,53,69,0.6) !important;">🗑️ Apagar</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,36 @@
+﻿@model ConfortAnimal.Models.Avaliacao
+
+@{
+    ViewData["Title"] = "Detalhes da Avaliação";
+}
+
+<h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">🔍 Detalhes da Avaliação</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="glass-box">
+            <hr class="glass-hr" />
+            <dl class="row">
+                <dt class="col-sm-4 glass-text-muted">🐄 Animal</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.bovinoId)</dd>
+
+                <dt class="col-sm-4 glass-text-muted">🌡️ Ambiente</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.ambienteId)</dd>
+
+                <dt class="col-sm-4 glass-text-muted">📊 ITU</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.valorITU)</dd>
+
+                <dt class="col-sm-4 glass-text-muted">📋 Resultado</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.resultado)</dd>
+
+                <dt class="col-sm-4 glass-text-muted">📅 Data</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.dataAvaliacao)</dd>
+            </dl>
+
+            <div class="d-grid gap-2 mt-3">
+                <a asp-action="Edit" asp-route-id="@Model?.id" class="btn btn-lg glass-btn">✏️ Editar</a>
+                <a asp-action="Index" class="btn btn-lg glass-btn">↩️ Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>

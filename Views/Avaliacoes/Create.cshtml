@@ -1,0 +1,49 @@
+﻿@model ConfortAnimal.Models.Avaliacao
+
+@{
+    ViewData["Title"] = "Nova Avaliação";
+}
+
+<h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">📋 Nova Avaliação</h1>
+<p class="glass-text-muted">Selecione o animal e o ambiente para calcular automaticamente o índice de conforto térmico (ITU).</p>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="glass-box">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-floating mb-3">
+                    <select asp-for="bovinoId" class="form-control glass-input" asp-items="ViewBag.Animais">
+                        <option value="">-- Selecione um Animal --</option>
+                    </select>
+                    <label asp-for="bovinoId" class="glass-label">🐄 Animal</label>
+                    <span asp-validation-for="bovinoId" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select asp-for="ambienteId" class="form-control glass-input" asp-items="ViewBag.Ambientes">
+                        <option value="">-- Selecione o Ambiente --</option>
+                    </select>
+                    <label asp-for="ambienteId" class="glass-label">🌡️ Ambiente</label>
+                    <span asp-validation-for="ambienteId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4" style="background-color: rgba(13,110,253,0.2); border: 1px solid rgba(13,110,253,0.4); border-radius: 8px; padding: 1rem;">
+                    <p class="glass-text mb-0">🤖 O <strong>ITU</strong> e o <strong>Resultado</strong> são calculados automaticamente!</p>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <input type="submit" value="➕ Criar Avaliação" class="btn btn-lg glass-btn" />
+                    <a asp-action="Index" class="btn btn-lg glass-btn">↩️ Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

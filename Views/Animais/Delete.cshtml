@@ -1,0 +1,35 @@
+﻿@model ConfortAnimal.Models.Animal
+
+@{
+    ViewData["Title"] = "Apagar Animal";
+}
+
+<h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">🗑️ Apagar Animal</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="glass-box">
+            <h4 class="glass-text">Tem a certeza que quer apagar?</h4>
+            <hr class="glass-hr" />
+
+            <dl class="row">
+                <dt class="col-sm-4 glass-text-muted">🐄 Nome</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.Nome)</dd>
+
+                <dt class="col-sm-4 glass-text-muted">⚖️ Peso</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.Peso)</dd>
+
+                <dt class="col-sm-4 glass-text-muted">📅 Idade</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.Idade)</dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-grid gap-2">
+                    <input type="submit" value="🗑️ Confirmar Apagar" class="btn btn-lg glass-btn" style="background-color: rgba(220,53,69,0.6) !important;" />
+                    <a asp-action="Index" class="btn btn-lg glass-btn">↩️ Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

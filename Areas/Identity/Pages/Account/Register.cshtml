@@ -1,0 +1,52 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Registar";
+}
+
+<h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="glass-box">
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h2 class="glass-text" style="font-weight: 600;">👤 Criar nova conta</h2>
+                <hr class="glass-hr" />
+                <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.UserName" class="form-control glass-input" autocomplete="username" aria-required="true" placeholder="" />
+                    <label asp-for="Input.UserName" class="glass-label">👤 Nome de Utilizador</label>
+                    <span asp-validation-for="Input.UserName" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control glass-input" autocomplete="email" aria-required="true" placeholder="" />
+                    <label asp-for="Input.Email" class="glass-label">📧 Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" class="form-control glass-input" autocomplete="new-password" aria-required="true" placeholder="" />
+                    <label asp-for="Input.Password" class="glass-label">🔒 Password</label>
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="Input.ConfirmPassword" class="form-control glass-input" autocomplete="new-password" aria-required="true" placeholder="" />
+                    <label asp-for="Input.ConfirmPassword" class="glass-label">🔒 Confirmar Password</label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button id="registerSubmit" type="submit" class="btn btn-lg glass-btn">✅ Criar Conta</button>
+                    <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-lg glass-btn">🔑 Já tenho conta</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

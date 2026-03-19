@@ -1,0 +1,33 @@
+﻿@model ConfortAnimal.Models.Ambiente
+
+@{
+    ViewData["Title"] = "Detalhes do Ambiente";
+}
+
+<h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">🔍 Detalhes do Ambiente</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="glass-box">
+            <hr class="glass-hr" />
+            <dl class="row">
+                <dt class="col-sm-4 glass-text-muted">🌡 Temp.</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.temperatura)</dd>
+
+                <dt class="col-sm-4 glass-text-muted">💧 Umidade</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.umidade)</dd>
+
+                <dt class="col-sm-4 glass-text-muted">📍 Local</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.local)</dd>
+
+                <dt class="col-sm-4 glass-text-muted">📅 Data</dt>
+                <dd class="col-sm-8 glass-text">@Html.DisplayFor(model => model.dataRegisto)</dd>
+            </dl>
+
+            <div class="d-grid gap-2 mt-3">
+                <a asp-action="Edit" asp-route-id="@Model?.id" class="btn btn-lg glass-btn">✏️ Editar</a>
+                <a asp-action="Index" class="btn btn-lg glass-btn">↩️ Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+/* mantém o brand como estava */
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* padrão de vaca no navbar */
+    .navbar {
+    background-image: 
+        radial-gradient(ellipse 30px 20px at 2%  30%, rgba(0,0,0,0.08) 100%, transparent 100%),
+        radial-gradient(ellipse 15px 25px at 7%  65%, rgba(0,0,0,0.06) 100%, transparent 100%),
+        radial-gradient(ellipse 25px 15px at 12% 20%, rgba(0,0,0,0.07) 100%, transparent 100%),
+        radial-gradient(ellipse 20px 18px at 17% 75%, rgba(0,0,0,0.08) 100%, transparent 100%),
+        radial-gradient(ellipse 18px 22px at 22% 40%, rgba(0,0,0,0.06) 100%, transparent 100%),
+        radial-gradient(ellipse 28px 16px at 27% 55%, rgba(0,0,0,0.07) 100%, transparent 100%),
+        radial-gradient(ellipse 16px 20px at 32% 25%, rgba(0,0,0,0.08) 100%, transparent 100%),
+        radial-gradient(ellipse 22px 18px at 37% 70%, rgba(0,0,0,0.06) 100%, transparent 100%),
+        radial-gradient(ellipse 20px 25px at 42% 35%, rgba(0,0,0,0.07) 100%, transparent 100%),
+        radial-gradient(ellipse 26px 16px at 47% 60%, rgba(0,0,0,0.08) 100%, transparent 100%),
+        radial-gradient(ellipse 18px 22px at 52% 20%, rgba(0,0,0,0.06) 100%, transparent 100%),
+        radial-gradient(ellipse 24px 18px at 57% 75%, rgba(0,0,0,0.07) 100%, transparent 100%),
+        radial-gradient(ellipse 20px 15px at 62% 40%, rgba(0,0,0,0.08) 100%, transparent 100%),
+        radial-gradient(ellipse 16px 24px at 67% 55%, rgba(0,0,0,0.06) 100%, transparent 100%),
+        radial-gradient(ellipse 28px 18px at 72% 25%, rgba(0,0,0,0.07) 100%, transparent 100%),
+        radial-gradient(ellipse 18px 20px at 77% 65%, rgba(0,0,0,0.08) 100%, transparent 100%),
+        radial-gradient(ellipse 22px 16px at 82% 35%, rgba(0,0,0,0.06) 100%, transparent 100%),
+        radial-gradient(ellipse 20px 24px at 87% 70%, rgba(0,0,0,0.07) 100%, transparent 100%),
+        radial-gradient(ellipse 26px 18px at 92% 30%, rgba(0,0,0,0.08) 100%, transparent 100%),
+        radial-gradient(ellipse 16px 22px at 97% 60%, rgba(0,0,0,0.06) 100%, transparent 100%);
+    background-color: #ffffff;
+}
+
+a {
+  color: #0077cc;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}

@@ -1,0 +1,59 @@
+﻿@model ConfortAnimal.Models.Avaliacao
+
+@{
+    ViewData["Title"] = "Editar Avaliação";
+}
+
+<h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">✏️ Editar Avaliação</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="glass-box">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="id" />
+
+                <div class="form-floating mb-3">
+                    <input asp-for="bovinoId" class="form-control glass-input" placeholder="bovinoId" />
+                    <label asp-for="bovinoId" class="glass-label">🐄 Animal</label>
+                    <span asp-validation-for="bovinoId" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="ambienteId" class="form-control glass-input" placeholder="ambienteId" />
+                    <label asp-for="ambienteId" class="glass-label">🌡️ Ambiente</label>
+                    <span asp-validation-for="ambienteId" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="valorITU" class="form-control glass-input" placeholder="valorITU" readonly />
+                    <label asp-for="valorITU" class="glass-label">📊 Valor ITU</label>
+                    <span asp-validation-for="valorITU" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="resultado" class="form-control glass-input" placeholder="resultado" readonly />
+                    <label asp-for="resultado" class="glass-label">📋 Resultado</label>
+                    <span asp-validation-for="resultado" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="dataAvaliacao" class="form-control glass-input" placeholder="dataAvaliacao" />
+                    <label asp-for="dataAvaliacao" class="glass-label">📅 Data</label>
+                    <span asp-validation-for="dataAvaliacao" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <input type="submit" value="💾 Salvar" class="btn btn-lg glass-btn" />
+                    <a asp-action="Index" class="btn btn-lg glass-btn">↩️ Voltar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
