@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ConfortAnimal.Controllers
 {
-    [Authorize(Roles = "Admin,Proprietario")]
+    [Authorize(Roles = "Admin,Proprietario")]   // Restringe o acesso a esta controller apenas para usuários com as funções "Admin" ou "Proprietario"
     public class AnimaisController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -26,21 +26,21 @@ namespace ConfortAnimal.Controllers
             if (User.IsInRole("Admin"))
             {
                 var animais = await _context.Animais
-                    .OfType<Bovino>()              // filtra só Bovinos na tabela Animais (herança)
-                    .Include(a => a.Proprietario)  // carrega o utilizador associado
+                    .OfType<Bovino>()                            // filtra só Bovinos na tabela Animais (herança)
+                    .Include(a => a.Proprietario)               // carrega o utilizador associado
                     .ToListAsync();
 
                 return View(animais);
             }
 
-            var userId = _userManager.GetUserId(User); // Busca o ID do utilizador logado
+            var userId = _userManager.GetUserId(User);       // Busca o ID do utilizador logado
 
             // Filtra só os animais do proprietário logado
             if (userId != null)
             {
                 var animais = await _context.Animais
-                    .OfType<Bovino>()              // filtra só Bovinos na tabela Animais (herança)
-                    .Where(a => a.ProprietarioId == userId)
+                    .OfType<Bovino>()                        // filtra só Bovinos na tabela Animais (herança)
+                    .Where(a => a.ProprietarioId == userId)  // filtra só os animais cujo ProprietarioId corresponde ao ID do utilizador logado
                     .ToListAsync();
 
                 return View(animais);
@@ -52,7 +52,7 @@ namespace ConfortAnimal.Controllers
         // GET: Animais/Details
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null) return NotFound();                 // Verifica se o ID foi fornecido
+            if (id == null) return NotFound();// Verifica se o ID foi fornecido
 
             var animal = await _context.Animais
                 .OfType<Bovino>()
@@ -61,11 +61,12 @@ namespace ConfortAnimal.Controllers
 
             if (animal == null) return NotFound();
 
+
             // Proprietario só vê os seus
             if (!User.IsInRole("Admin"))
             {
-                var userId = _userManager.GetUserId(User); // Obtém o ID do usuário logado
-                if (animal.ProprietarioId != userId)       // Verifica se o animal pertence ao proprietário logado
+                var userId = _userManager.GetUserId(User);     // Obtém o ID do usuário logado
+                if (animal.ProprietarioId != userId)          // Verifica se o animal pertence ao proprietário logado
                     return Forbid();
             }
 
@@ -75,7 +76,7 @@ namespace ConfortAnimal.Controllers
         // GET: Animais/Create
         public IActionResult Create()
         {
-            return View(new Bovino()); // instancia Bovino para o Discriminator ficar correto na BD
+            return View(new Bovino());                        // instancia Bovino para ficar correto na BD
         }
 
         // POST: Animais/Create
@@ -83,12 +84,12 @@ namespace ConfortAnimal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nome,Peso,Idade,Raca,ProdutividadeLeite")] Bovino animal)
         {
-            if (ModelState.IsValid) // Verifica se os dados são válidos
+            if (ModelState.IsValid)                                     // Verifica se os dados são válidos segundo as regras de validação definidas no modelo
             {
-                animal.ProprietarioId = _userManager.GetUserId(User); // Atribui o ID do utilizador logado como proprietário
+                animal.ProprietarioId = _userManager.GetUserId(User);   // Atribui o ID do utilizador logado como proprietário
 
-                _context.Add(animal);              // Adiciona o bovino ao contexto
-                await _context.SaveChangesAsync(); // Guarda na base de dados
+                _context.Add(animal);                                   // Adiciona o bovino ao contexto
+                await _context.SaveChangesAsync();                      // Guarda na base de dados
                 return RedirectToAction(nameof(Index));
             }
             return View(animal);
@@ -103,7 +104,7 @@ namespace ConfortAnimal.Controllers
             }
 
             var animal = await _context.Animais
-                .OfType<Bovino>()                        // filtra só Bovinos — necessário para carregar Raca e ProdutividadeLeite
+                .OfType<Bovino>()                           // filtra só Bovinos — necessário para carregar Raca e ProdutividadeLeite
                 .FirstOrDefaultAsync(a => a.Id == id);
 
             if (animal == null)
@@ -127,7 +128,8 @@ namespace ConfortAnimal.Controllers
             {
                 try
                 {
-                    // Preserva o ProprietarioId original
+                    // Preserva o ProprietarioId original do animal para evitar que seja alterado durante a edição, garantindo que o proprietário do animal permaneça o mesmo mesmo que outro usuário tente editar o registro
+
                     var original = await _context.Animais.AsNoTracking() // evita que o EF Core rastreie a entidade original, permitindo apenas ler o ProprietarioId sem afetar o estado do contexto
                         .FirstOrDefaultAsync(a => a.Id == id);
                     animal.ProprietarioId = original?.ProprietarioId;
@@ -184,11 +186,9 @@ namespace ConfortAnimal.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
-        // Verifica se um animal existe pelo ID — usado no tratamento de erros do Edit
         private bool AnimalExists(int id)
         {
-            return _context.Animais.Any(e => e.Id == id);
+            return _context.Animais.Any(e => e.Id == id);   // Verifica se existe um animal com o ID especificado e se é do tipo Bovino
         }
     }
 }

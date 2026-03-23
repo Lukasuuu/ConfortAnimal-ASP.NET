@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ConfortAnimal.Controllers
 {
-    [Authorize(Roles = "Admin,Proprietario")]
+    [Authorize(Roles = "Admin,Proprietario")]  // Restringe o acesso a esta controller apenas para usuários com as funções "Admin" ou "Proprietario"
     public class AvaliacoesController : Controller
     {
         private readonly ApplicationDbContext _context;                           // Campo para acessar o banco de dados e realizar operações CRUD nas avaliações
@@ -42,10 +42,11 @@ namespace ConfortAnimal.Controllers
                 if (userId != null)
                 {
                     var avaliacoes = await _context.Avaliacoes
-                        .Include(a => a.Bovino)    // carrega o bovino
-                        .Include(a => a.Ambiente)  // carrega o ambiente
-                        .Where(a => a.ProprietarioId == userId)
+                        .Include(a => a.Bovino)    // carrega o bovino relacionado à avaliação, permitindo que as informações do bovino sejam acessíveis na view, como nome, raça, etc.
+                        .Include(a => a.Ambiente)  // carrega o ambiente relacionado à avaliação, permitindo que as informações do ambiente sejam acessíveis na view, como localização, temperatura, umidade, etc.
+                        .Where(a => a.ProprietarioId == userId) // Filtra as avaliações para incluir apenas aquelas cujo ProprietarioId corresponde ao ID do usuário logado, garantindo que o proprietário veja apenas suas próprias avaliações
                         .ToListAsync();
+
                     return View(avaliacoes);
                 }
             }
@@ -67,6 +68,7 @@ namespace ConfortAnimal.Controllers
             if (!User.IsInRole("Admin"))
             {
                 var userId = _userManager.GetUserId(User); // Obtém o ID do usuário logado
+
                 if (avaliacao.ProprietarioId != userId)   // Verifica se a avaliação pertence ao proprietário logado
                     return Forbid();
             }
@@ -82,8 +84,8 @@ namespace ConfortAnimal.Controllers
             if (User.IsInRole("Admin"))
             {
                 // Admin vê tudo
-                var animais = await _context.Animais.ToListAsync();     // Admin vê todos os animais, sem filtro por proprietário
-                var ambientes = await _context.Ambiente.ToListAsync(); // Admin vê todos os ambientes, sem filtro por proprietário
+                var animais = await _context.Animais.ToListAsync();       // Admin vê todos os animais, sem filtro por proprietário
+                var ambientes = await _context.Ambiente.ToListAsync();   // Admin vê todos os ambientes, sem filtro por proprietário
 
                 ViewBag.Animais = new SelectList(animais, "Id", "Nome");
                 ViewBag.Ambientes = new SelectList(ambientes, "id", "local");

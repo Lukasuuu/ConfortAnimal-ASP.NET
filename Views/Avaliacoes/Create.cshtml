@@ -14,7 +14,7 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-floating mb-3">
-                    <select asp-for="bovinoId" class="form-control glass-input" asp-items="ViewBag.Animais">
+                    <select asp-for="bovinoId" class="form-control glass-input" asp-items="@ViewBag.Animais">
                         <option value="">-- Selecione um Animal --</option>
                     </select>
                     <label asp-for="bovinoId" class="glass-label">🐄 Animal</label>
@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <select asp-for="ambienteId" class="form-control glass-input" asp-items="ViewBag.Ambientes">
+                    <select asp-for="ambienteId" class="form-control glass-input" asp-items="@ViewBag.Ambientes">
                         <option value="">-- Selecione o Ambiente --</option>
                     </select>
                     <label asp-for="ambienteId" class="glass-label">🌡️ Ambiente</label>

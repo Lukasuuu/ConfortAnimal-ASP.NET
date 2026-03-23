@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ConfortAnimal.Controllers
 {
-    [Authorize(Roles = "Admin,Proprietario")]
+    [Authorize(Roles = "Admin,Proprietario")]  // Restringe o acesso a esta controller apenas para usuários com as funções "Admin" ou "Proprietario"
     public class AmbientesController : Controller
     {
         private readonly ApplicationDbContext _context;
