@@ -68,7 +68,13 @@ O ITU é um indicador amplamente utilizado na pecuária para avaliar o nível de
 - Controlo de acesso por roles (Admin / Proprietário)
 - Isolamento de dados por utilizador
 
----
+## 🧪 Utilizadores de Teste
+
+| Utilizador | Senha | Role |
+|---|---|---|
+| `Lucas` | `Luc@123` | Proprietário |
+| `joao` | `Joao@123` | Proprietário |
+| `Admin` | `Admin@123` | Administrador |
 
 ## Tecnologias
 
@@ -80,8 +86,6 @@ O ITU é um indicador amplamente utilizado na pecuária para avaliar o nível de
 | Base de Dados | SQL Server / SQLite |
 | Frontend | Razor Views + Bootstrap |
 | Linguagem | C# |
-
----
 
 ## Arquitetura
 
@@ -106,15 +110,12 @@ ConfortAnimal/
     └── Avaliacoes/
 ```
 
----
 
 ## Pré-requisitos
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download)
 - [SQL Server](https://www.microsoft.com/sql-server) ou [SQLite](https://www.sqlite.org/)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/) ou [VS Code](https://code.visualstudio.com/)
-
----
 
 ## Instalação e Execução
 
@@ -151,7 +152,6 @@ dotnet run
 
 A aplicação ficará disponível em `https://localhost:5001`.
 
----
 
 ## Roles e Permissões
 
@@ -164,8 +164,6 @@ A aplicação ficará disponível em `https://localhost:5001`.
 | Eliminar registos | ✅ | ✅ (só os seus) |
 
 > Os proprietários apenas têm acesso aos seus próprios animais, ambientes e avaliações. O campo `ProprietarioId` é preservado em todas as operações de edição para garantir a integridade dos dados.
-
----
 
 ## Cálculo do ITU
 
@@ -188,8 +186,6 @@ Onde:
 | 79 – 88 | 🟠 **Perigo** | Stress térmico significativo |
 | > 88 | 🔴 **Emergência** | Risco elevado para a saúde animal |
 
----
-
 ## Estrutura do Projeto
 
 ```
@@ -206,8 +202,6 @@ ConfortAnimal/
 │   └── Program.cs
 └── README.md
 ```
-
----
 
 ## Contribuição
 
@@ -226,7 +220,6 @@ Contribuições são bem-vindas! Para contribuir:
 Este projeto está licenciado sob a licença MIT. Consulte o ficheiro [LICENSE](LICENSE) para mais detalhes.
 
 ---
-
 <p align="center">
   Desenvolvido com ❤️ para a monitorização do bem-estar animal
 </p>
