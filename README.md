@@ -1,6 +1,23 @@
-# 🐄 ConfortAnimal
+# 🐄 ConfortAnimal — Sistema de Bioclimatologia Animal
 
-> Sistema web para monitorização do conforto térmico de bovinos, com cálculo automático do Índice de Temperatura e Umidade (ITU) e classificação de risco.
+<div align="center">
+
+![Java](https://img.shields.io/badge/Java-21-orange?style=for-the-badge&logo=java)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-blue?style=for-the-badge&logo=mysql)
+![NetBeans](https://img.shields.io/badge/NetBeans-IDE-brightgreen?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=for-the-badge)
+![License](https://img.shields.io/badge/Licença-Académica-lightgrey?style=for-the-badge)
+
+<br>
+
+ **Sistema desktop em ASP.NET para avaliação do conforto térmico de bovinos,**  
+ **utilizando o Índice de Temperatura e Umidade (ITU) como base científica.**
+
+<br>
+
+</div>
+
+
 
 ---
 
