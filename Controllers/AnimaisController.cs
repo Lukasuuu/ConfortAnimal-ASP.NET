@@ -11,12 +11,12 @@ namespace ConfortAnimal.Controllers
     public class AnimaisController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;         // Campo para gerenciar usuários e obter informações sobre o usuário logado
 
         public AnimaisController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
-            _userManager = userManager;
+            _userManager = userManager;                                 // Injeção de dependência para acessar o banco de dados e gerenciar usuários
         }
 
         // GET: Animais
@@ -52,17 +52,21 @@ namespace ConfortAnimal.Controllers
         // GET: Animais/Details
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();                 // Verifica se o ID foi fornecido
 
             var animal = await _context.Animais
-                .FirstOrDefaultAsync(m => m.Id == id); // Busca o animal pelo ID
+                .OfType<Bovino>()
+                .Include(a => a.Proprietario)
+                .FirstOrDefaultAsync(m => m.Id == id); // Busca o animal com o ID especificado no banco de dados, incluindo os dados do proprietário
 
-            if (animal == null)
+            if (animal == null) return NotFound();
+
+            // Proprietario só vê os seus
+            if (!User.IsInRole("Admin"))
             {
-                return NotFound();
+                var userId = _userManager.GetUserId(User); // Obtém o ID do usuário logado
+                if (animal.ProprietarioId != userId)       // Verifica se o animal pertence ao proprietário logado
+                    return Forbid();
             }
 
             return View(animal);
@@ -123,24 +127,23 @@ namespace ConfortAnimal.Controllers
             {
                 try
                 {
-                    // Preserva o ProprietarioId original — o formulário não envia este campo
-                    // sem isto o ProprietarioId ficaria null após o Edit
-                    var original = await _context.Animais.AsNoTracking()
+                    // Preserva o ProprietarioId original
+                    var original = await _context.Animais.AsNoTracking() // evita que o EF Core rastreie a entidade original, permitindo apenas ler o ProprietarioId sem afetar o estado do contexto
                         .FirstOrDefaultAsync(a => a.Id == id);
                     animal.ProprietarioId = original?.ProprietarioId;
 
                     _context.Update(animal);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException)  // captura erros de concorrência (ex: outro usuário editou o mesmo registro)
                 {
-                    if (!AnimalExists(animal.Id))
+                    if (!AnimalExists(animal.Id))    // verifica se o animal ainda existe no banco de dados
                     {
-                        return NotFound();
+                        return NotFound();            // se o animal foi deletado por outro usuário, retorna NotFound
                     }
                     else
                     {
-                        throw;
+                        throw;                       // se o animal existe, mas ocorreu um erro de concorrência, relança a exceção para ser tratada globalmente
                     }
                 }
                 return RedirectToAction(nameof(Index));
@@ -157,7 +160,8 @@ namespace ConfortAnimal.Controllers
             }
 
             var animal = await _context.Animais
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id);          // Busca o animal com o ID especificado no banco de dados
+
             if (animal == null)
             {
                 return NotFound();
@@ -171,10 +175,10 @@ namespace ConfortAnimal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var animal = await _context.Animais.FindAsync(id);
+            var animal = await _context.Animais.FindAsync(id);  // Busca o animal com o ID especificado no banco de dados
             if (animal != null)
             {
-                _context.Animais.Remove(animal);
+                _context.Animais.Remove(animal);               // Remove o animal do contexto, marcando-o para exclusão
             }
 
             await _context.SaveChangesAsync();

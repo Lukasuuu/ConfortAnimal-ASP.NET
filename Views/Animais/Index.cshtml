@@ -34,12 +34,12 @@
         @foreach (var item in Model)
         {
             <tr>
-                {{!-- Campos base do Animal --}}
+
                 <td>@Html.DisplayFor(modelItem => item.Nome)</td>
                 <td>@Html.DisplayFor(modelItem => item.Peso)</td>
                 <td>@Html.DisplayFor(modelItem => item.Idade)</td>
 
-                {{!-- Campos específicos do Bovino --}}
+             
                 <td>@(item.Raca ?? "N/A")</td>
                 <td>@item.ProdutividadeLeite L/dia</td>
 

@@ -37,7 +37,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-app.MapRazorPages()
+app.MapRazorPages()           // Configura o roteamento para as páginas Razor, que são usadas para as páginas de identidade (login, registro, etc.) e outras páginas Razor na aplicação.
    .WithStaticAssets();
 
 
@@ -60,8 +60,8 @@ using (var scope = app.Services.CreateScope())
     }
 
     // Cria o utilizador Admin se não existir
-    var adminEmail = "admin@confortanimal.com";
-    var adminUser = await userManager.FindByEmailAsync(adminEmail);
+    var adminEmail = "admin@confortanimal.com";                      // Define o email do usuário admin
+    var adminUser = await userManager.FindByEmailAsync(adminEmail); // Verifica se já existe um usuário com o email do admin
 
     if (adminUser == null)
     {
@@ -74,7 +74,7 @@ using (var scope = app.Services.CreateScope())
 
         var createResult = await userManager.CreateAsync(adminUser, "Admin@123");
         
-        if (createResult.Succeeded)
+        if (createResult.Succeeded)  // Verifica se o usuário foi criado com sucesso antes de tentar adicionar a role
         {
             // Adiciona a Role Admin ao utilizador (com maiúscula, conforme criada)
             await userManager.AddToRoleAsync(adminUser, "Admin");
